@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.form-label {
+  @apply block mb-2 text-sm font-medium text-gray-300;
+}
+
+.form-input {
+  @apply block w-full p-2.5 text-sm rounded-lg bg-gray-700 border border-gray-600 text-white placeholder-gray-400
+  focus:ring-blue-500 focus:border-blue-500;
+}
+
+.form-button {
+  @apply px-5 py-2.5 text-center font-medium rounded-lg text-sm w-full text-white bg-blue-600 
+  hover:bg-blue-700 
+  focus:ring-4 focus:outline-none focus:ring-blue-800
+  disabled:opacity-50 disabled:cursor-not-allowed
+  sm:w-auto;
+}
+
+.wrapper {
+  @apply rounded-xl bg-gradient-to-r bg-gray-800 border border-gray-700 p-2 sm:p-6;
+}
+
+body {
+  @apply bg-gray-900;
+}
+
+#root {
+  @apply flex items-center flex-col;
+}
