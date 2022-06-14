@@ -15,8 +15,12 @@ function reducer(state, action) {
 
 const TodoProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, {
-    todos: [],
+    todos: localStorage.getItem('todos') ? JSON.parse(localStorage.getItem('todos')) : [],
   })
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(state.todos))
+  }, [state.todos])
 
   const data = {
     todos: state.todos,
