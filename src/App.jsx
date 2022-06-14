@@ -1,14 +1,8 @@
-import AddTodo from './components/AddTodo'
-import TodoList from './components/TodoList'
+import { useRoutes } from 'react-router-dom'
 import Provider from './context'
 
+import routes from './routes'
+
 export default function App() {
-  return (
-    <Provider>
-      <div className="w-full max-w-3xl px-3 py-3">
-        <AddTodo />
-        <TodoList />
-      </div>
-    </Provider>
-  )
+  return <Provider>{useRoutes(routes)}</Provider>
 }

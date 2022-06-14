@@ -23,6 +23,12 @@
   @apply rounded-xl bg-gradient-to-r bg-gray-800 border border-gray-700 p-2 sm:p-6;
 }
 
+html,
+body,
+#root {
+  @apply h-full;
+}
+
 body {
   @apply bg-gray-900;
 }
