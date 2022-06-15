@@ -1,7 +1,12 @@
 import TodoProvider, { useTodo } from './TodoContext'
+import AuthProvider, { useAuth } from './AuthContext'
 
 export default function Provider({ children }) {
-  return <TodoProvider>{children}</TodoProvider>
+  return (
+    <AuthProvider>
+      <TodoProvider>{children}</TodoProvider>
+    </AuthProvider>
+  )
 }
 
-export { useTodo }
+export { useTodo, useAuth }

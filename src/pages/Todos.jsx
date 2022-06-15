@@ -1,9 +1,6 @@
-import { NavLink } from 'react-router-dom'
 import AddTodo from '../components/AddTodo'
 import Header from '../components/Header'
-import SignOutButton from '../components/SignOutButton'
 import TodoList from '../components/TodoList'
-import { getPath } from '../utils'
 
 export default function Todos() {
   return (

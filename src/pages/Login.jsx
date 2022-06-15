@@ -1,13 +1,31 @@
-import { useNavigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { getPath } from '../utils'
+import { useAuth } from '../context'
+import { useState } from 'react'
 
 export default function Login() {
-  const navigate = useNavigate()
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+
+  const auth = useAuth()
+
+  if (Object.keys(auth.user).length !== 0) {
+    return (
+      <Navigate
+        to={getPath('index')}
+        replace={true}
+      />
+    )
+  }
 
   function submitHandle(e) {
     e.preventDefault()
 
-    navigate(getPath('index'))
+    try {
+      auth.login(username, password)
+    } catch (_) {
+      alert('Kullanıcı bulunamadı!')
+    }
   }
 
   return (
@@ -22,6 +40,10 @@ export default function Login() {
                   type="text"
                   className="form-input"
                   placeholder="Kullanıcı Adı"
+                  value={username}
+                  onChange={(e) => {
+                    setUsername(e.target.value)
+                  }}
                 />
               </div>
               <div className="mb-6">
@@ -30,6 +52,10 @@ export default function Login() {
                   type="password"
                   className="form-input"
                   placeholder="Şifre"
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value)
+                  }}
                 />
               </div>
               <button
