@@ -3,6 +3,7 @@ import { Formik } from 'formik'
 import { getPath } from '../utils'
 import { useAuth } from '../context'
 import Input from '../components/Input'
+import { LoginSchema } from '../validations/LoginSchema '
 
 export default function Login() {
   const auth = useAuth()
@@ -38,19 +39,25 @@ export default function Login() {
                   alert('Kullanıcı bulunamadı!')
                 }
               }}
+              validationSchema={LoginSchema}
             >
-              {({ handleSubmit }) => (
+              {({ handleSubmit, errors, touched }) => (
                 <form onSubmit={handleSubmit}>
                   <div className="mb-6">
                     <Input
                       label="Kullanıcı Adı"
                       name="username"
+                      errors={errors.username}
+                      touched={touched.username}
                     />
                   </div>
                   <div className="mb-6">
                     <Input
+                      type="password"
                       label="Şifre"
                       name="password"
+                      errors={errors.password}
+                      touched={touched.password}
                     />
                   </div>
                   <div className="flex flex-col gap-3 sm:flex-row sm:justify-between">
