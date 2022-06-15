@@ -1,4 +1,4 @@
-import { Navigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { getPath } from '../utils'
 import { useAuth } from '../context'
 import { useState } from 'react'
@@ -8,6 +8,7 @@ export default function Login() {
   const [password, setPassword] = useState('')
 
   const auth = useAuth()
+  const navigate = useNavigate()
 
   if (Object.keys(auth.user).length !== 0) {
     return (
@@ -26,6 +27,10 @@ export default function Login() {
     } catch (_) {
       alert('Kullanıcı bulunamadı!')
     }
+  }
+
+  function continueHandle() {
+    navigate(getPath('index'))
   }
 
   return (
@@ -58,12 +63,21 @@ export default function Login() {
                   }}
                 />
               </div>
-              <button
-                type="submit"
-                className="form-button"
-              >
-                Giriş Yap
-              </button>
+              <div className="flex flex-col gap-3 sm:flex-row sm:justify-between">
+                <button
+                  type="submit"
+                  className="form-button"
+                >
+                  Giriş Yap
+                </button>
+                <button
+                  type="button"
+                  className="form-button bg-green-500 hover:bg-green-700 focus:ring-green-800"
+                  onClick={continueHandle}
+                >
+                  Devam Et
+                </button>
+              </div>
             </form>
           </div>
         </div>
