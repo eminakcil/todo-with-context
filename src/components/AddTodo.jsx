@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { useTodo } from '../context'
+import { useTodo, useAuth } from '../context'
 
 export default function AddTodo() {
   const [todo, setTodo] = useState('')
@@ -7,6 +7,7 @@ export default function AddTodo() {
   const inputRef = useRef()
 
   const { addTodo } = useTodo()
+  const { user } = useAuth()
 
   /** @param {import('react').FormEvent} e */
   function submitHandle(e) {
@@ -14,6 +15,8 @@ export default function AddTodo() {
 
     addTodo({
       title: todo,
+      userId: user.id,
+      complated: false,
     })
 
     setTodo('')
