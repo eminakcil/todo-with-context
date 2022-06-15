@@ -23,6 +23,16 @@ export default function AddTodo() {
     inputRef.current.focus()
   }
 
+  const signedIn = Object.keys(user).length !== 0
+
+  const disabled = !signedIn || todo.length === 0
+
+  function clickHandle() {
+    if (!signedIn) {
+      alert('Eklemek için önce giriş yap!')
+    }
+  }
+
   return (
     <div className="wrapper">
       <form onSubmit={submitHandle}>
@@ -41,10 +51,19 @@ export default function AddTodo() {
         </div>
         <button
           type="submit"
-          className="form-button"
-          disabled={todo.length === 0}
+          className="form-button relative"
+          disabled={disabled}
+          onClick={clickHandle}
         >
-          Ekle
+          <>
+            Ekle
+            {disabled && (
+              <div
+                className="absolute top-0 left-0 w-full h-full"
+                onClick={clickHandle}
+              ></div>
+            )}
+          </>
         </button>
       </form>
     </div>

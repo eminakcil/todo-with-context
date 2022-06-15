@@ -3,10 +3,10 @@ import { useAuth } from '../context'
 import HeaderButton from './HeaderButton'
 
 export default function SignOutButton() {
-  const auth = useAuth()
+  const { logout } = useAuth()
 
   function clickHandle() {
-    auth.logout()
+    logout()
   }
 
   return <HeaderButton onClick={clickHandle}>Çıkış Yap</HeaderButton>
