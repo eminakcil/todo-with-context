@@ -24,7 +24,7 @@ export default function Login() {
 
   return (
     <>
-      <div className="w-full h-full flex flex-col items-center justify-center">
+      <div className="w-full h-screen flex flex-col items-center justify-center">
         <div className="w-full max-w-3xl px-3 py-3">
           <div className="wrapper">
             <Formik

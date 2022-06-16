@@ -28,14 +28,20 @@
   sm:w-auto;
   }
 
+  .btn-outline-danger {
+    @apply bg-transparent border border-red-600 text-red-600 hover:text-white hover:bg-red-700 focus:ring-red-800;
+  }
+
+  .btn-outline-success {
+    @apply bg-transparent border  border-green-600 text-green-600 hover:text-white hover:bg-green-700 focus:ring-green-800;
+  }
+
   .wrapper {
     @apply rounded-xl bg-gradient-to-r bg-gray-800 border border-gray-700 p-2 sm:p-6;
   }
 
-  html,
-  body,
   #root {
-    @apply h-full;
+    @apply min-h-screen;
   }
 
   body {
