@@ -69,7 +69,7 @@ export default function Login() {
                     </button>
                     <button
                       type="button"
-                      className="form-button bg-green-500 hover:bg-green-700 focus:ring-green-800"
+                      className="form-button btn-outline-success"
                       onClick={continueHandle}
                     >
                       Devam Et
