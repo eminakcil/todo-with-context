@@ -1,8 +1,9 @@
 import classNames from 'classnames'
-import { useTodo } from '../context'
+import { useTodo, useAuth } from '../context'
 
 export default function FilterButtons() {
   const { onlyMe, updateOnlyMe, completed, updateCompleted } = useTodo()
+  const { user } = useAuth()
 
   function onlyMeHandle() {
     updateOnlyMe(!onlyMe)
@@ -17,17 +18,19 @@ export default function FilterButtons() {
 
   return (
     <div className="flex flex-row justify-end flex-wrap w-full gap-6">
-      <button
-        type="button"
-        onClick={onlyMeHandle}
-        className={classNames({
-          'form-button w-auto flex-1 sm:flex-initial': true,
-          'btn-outline-gray': !onlyMe,
-          'btn-outline-white': onlyMe,
-        })}
-      >
-        Sadece Benim
-      </button>
+      {Object.keys(user).length !== 0 && (
+        <button
+          type="button"
+          onClick={onlyMeHandle}
+          className={classNames({
+            'form-button w-auto flex-1 sm:flex-initial': true,
+            'btn-outline-gray': !onlyMe,
+            'btn-outline-white': onlyMe,
+          })}
+        >
+          Sadece Benim
+        </button>
+      )}
       <button
         type="button"
         onClick={toggleCompleted.bind(this, 'completed')}
