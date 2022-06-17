@@ -37,6 +37,11 @@ function reducer(state, action) {
         ...state,
         completed: action.payload,
       }
+    case 'UPDATE_SEARCH_QUERY':
+      return {
+        ...state,
+        searchQuery: action.payload,
+      }
     default:
       throw new Error()
   }
@@ -47,8 +52,9 @@ const TodoProvider = ({ children }) => {
 
   const [state, dispatch] = useReducer(reducer, {
     todos: localStorage.getItem('todos') ? JSON.parse(localStorage.getItem('todos')) : [],
-    completed: false, // completed, false, uncompleted
     onlyMe: false,
+    completed: false, // completed, false, uncompleted
+    searchQuery: '',
   })
 
   useEffect(() => {
@@ -59,8 +65,10 @@ const TodoProvider = ({ children }) => {
     todos: state.todos,
     onlyMe: state.onlyMe,
     completed: state.completed,
+    searchQuery: state.searchQuery,
     filteredTodos: state.todos.filter((todo) => {
       return (
+        todo.title.toLocaleLowerCase('TR').includes(state.searchQuery.toLocaleLowerCase('TR')) &&
         (Object.keys(user).length !== 0 && state.onlyMe ? todo.userId === user.id : true) &&
         (state.completed !== false
           ? state.completed === 'completed'
@@ -85,6 +93,9 @@ const TodoProvider = ({ children }) => {
     },
     updateCompleted(value) {
       dispatch({ type: 'UPDATE_COMPLETED', payload: value })
+    },
+    updateSearchQuery(value) {
+      dispatch({ type: 'UPDATE_SEARCH_QUERY', payload: value })
     },
   }
 
