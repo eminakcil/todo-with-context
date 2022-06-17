@@ -19,8 +19,8 @@ function reducer(state, action) {
     case 'TOGGLE_TODO': {
       const todoIndex = state.todos.findIndex((todo) => todo.id === action.payload.id)
       const todos = [...state.todos]
-      todos[todoIndex].complated =
-        action.payload.status === null ? !todos[todoIndex].complated : action.payload.status
+      todos[todoIndex].completed =
+        action.payload.status === null ? !todos[todoIndex].completed : action.payload.status
 
       return {
         ...state,

@@ -22,14 +22,14 @@ export default function TodoItem({ todo }) {
         <div
           className={classNames({
             'flex-1 text-white': true,
-            'line-through opacity-50': todo.complated,
+            'line-through opacity-50': todo.completed,
           })}
         >
           {todo.title}
         </div>
         {user.id === todo.userId && (
           <>
-            {todo.complated ? (
+            {todo.completed ? (
               <button
                 onClick={toggleHandle}
                 className="form-button btn-outline-danger w-auto"

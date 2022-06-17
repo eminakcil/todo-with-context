@@ -16,7 +16,7 @@ export default function AddTodo() {
     addTodo({
       title: todo,
       userId: user.id,
-      complated: false,
+      completed: false,
     })
 
     setTodo('')
