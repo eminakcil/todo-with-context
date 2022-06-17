@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useReducer } from 'react'
 import { nanoid } from 'nanoid'
+import { useAuth } from './'
 
 const TodoContext = createContext()
 
@@ -7,10 +8,12 @@ function reducer(state, action) {
   switch (action.type) {
     case 'ADD_TODO':
       return {
+        ...state,
         todos: [...state.todos, action.payload],
       }
     case 'REMOVE_TODO':
       return {
+        ...state,
         todos: state.todos.filter((todo) => todo.id !== action.payload),
       }
     case 'TOGGLE_TODO': {
@@ -20,17 +23,27 @@ function reducer(state, action) {
         action.payload.status === null ? !todos[todoIndex].complated : action.payload.status
 
       return {
+        ...state,
         todos,
       }
     }
+    case 'UPDATE_ONLY_ME':
+      return {
+        ...state,
+        onlyMe: action.payload,
+      }
     default:
       throw new Error()
   }
 }
 
 const TodoProvider = ({ children }) => {
+  const { user } = useAuth()
+
   const [state, dispatch] = useReducer(reducer, {
     todos: localStorage.getItem('todos') ? JSON.parse(localStorage.getItem('todos')) : [],
+    completed: false,
+    onlyMe: false,
   })
 
   useEffect(() => {
@@ -39,6 +52,14 @@ const TodoProvider = ({ children }) => {
 
   const data = {
     todos: state.todos,
+    filteredTodos: state.todos.filter((todo) => {
+      if (Object.keys(user).keys !== 0) {
+        if (state.onlyMe) {
+          return todo.userId === user.id
+        }
+      }
+      return true
+    }),
     addTodo(todo) {
       if (!('id' in todo)) todo.id = nanoid()
 
@@ -49,6 +70,9 @@ const TodoProvider = ({ children }) => {
     },
     toggleTodo(id, status = null) {
       dispatch({ type: 'TOGGLE_TODO', payload: { id, status } })
+    },
+    updateOnlyMe(value) {
+      dispatch({ type: 'UPDATE_ONLY_ME', payload: value })
     },
   }
 
