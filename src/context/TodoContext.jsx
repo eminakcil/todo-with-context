@@ -32,6 +32,11 @@ function reducer(state, action) {
         ...state,
         onlyMe: action.payload,
       }
+    case 'UPDATE_COMPLETED':
+      return {
+        ...state,
+        completed: action.payload,
+      }
     default:
       throw new Error()
   }
@@ -53,6 +58,7 @@ const TodoProvider = ({ children }) => {
   const data = {
     todos: state.todos,
     onlyMe: state.onlyMe,
+    completed: state.completed,
     filteredTodos: state.todos.filter((todo) => {
       return (
         (Object.keys(user).length !== 0 && state.onlyMe ? todo.userId === user.id : true) &&
@@ -76,6 +82,9 @@ const TodoProvider = ({ children }) => {
     },
     updateOnlyMe(value) {
       dispatch({ type: 'UPDATE_ONLY_ME', payload: value })
+    },
+    updateCompleted(value) {
+      dispatch({ type: 'UPDATE_COMPLETED', payload: value })
     },
   }
 
