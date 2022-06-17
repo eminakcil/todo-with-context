@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 import { useTodo, useAuth } from '../context'
+import FilterButtons from './FilterButtons'
 
 export default function AddTodo() {
   const [todo, setTodo] = useState('')
@@ -49,22 +50,25 @@ export default function AddTodo() {
             }}
           />
         </div>
-        <button
-          type="submit"
-          className="form-button relative"
-          disabled={disabled}
-          onClick={clickHandle}
-        >
-          <>
-            Ekle
-            {disabled && (
-              <div
-                className="absolute top-0 left-0 w-full h-full"
-                onClick={clickHandle}
-              ></div>
-            )}
-          </>
-        </button>
+        <div className="flex flex-col sm:flex-row gap-6">
+          <button
+            type="submit"
+            className="form-button relative"
+            disabled={disabled}
+            onClick={clickHandle}
+          >
+            <>
+              Ekle
+              {disabled && (
+                <div
+                  className="absolute top-0 left-0 w-full h-full"
+                  onClick={clickHandle}
+                ></div>
+              )}
+            </>
+          </button>
+          <FilterButtons />
+        </div>
       </form>
     </div>
   )

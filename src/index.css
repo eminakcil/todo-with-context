@@ -36,6 +36,14 @@
     @apply bg-transparent border  border-green-600 text-green-600 hover:text-white hover:bg-green-700 focus:ring-green-800;
   }
 
+  .btn-outline-gray {
+    @apply bg-transparent border  border-gray-600 text-gray-400 hover:text-white hover:bg-gray-700 focus:ring-gray-800;
+  }
+
+  .btn-gray {
+    @apply bg-transparent border  border-gray-600 text-gray-400 hover:text-white bg-gray-700 hover:bg-gray-800 focus:ring-gray-800;
+  }
+
   .wrapper {
     @apply rounded-xl bg-gradient-to-r bg-gray-800 border border-gray-700 p-2 sm:p-6;
   }

@@ -42,7 +42,7 @@ const TodoProvider = ({ children }) => {
 
   const [state, dispatch] = useReducer(reducer, {
     todos: localStorage.getItem('todos') ? JSON.parse(localStorage.getItem('todos')) : [],
-    completed: false,
+    completed: false, // completed, false, uncompleted
     onlyMe: false,
   })
 
@@ -52,13 +52,16 @@ const TodoProvider = ({ children }) => {
 
   const data = {
     todos: state.todos,
+    onlyMe: state.onlyMe,
     filteredTodos: state.todos.filter((todo) => {
-      if (Object.keys(user).keys !== 0) {
-        if (state.onlyMe) {
-          return todo.userId === user.id
-        }
-      }
-      return true
+      return (
+        (Object.keys(user).length !== 0 && state.onlyMe ? todo.userId === user.id : true) &&
+        (state.completed !== false
+          ? state.completed === 'completed'
+            ? todo.completed
+            : !todo.completed
+          : true)
+      )
     }),
     addTodo(todo) {
       if (!('id' in todo)) todo.id = nanoid()
