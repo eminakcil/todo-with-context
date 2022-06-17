@@ -2,10 +2,17 @@ import classNames from 'classnames'
 import { useTodo } from '../context'
 
 export default function FilterButtons() {
-  const { onlyMe, updateOnlyMe } = useTodo()
+  const { onlyMe, updateOnlyMe, completed, updateCompleted } = useTodo()
 
   function onlyMeHandle() {
     updateOnlyMe(!onlyMe)
+  }
+
+  function toggleCompleted(value) {
+    if (completed === value) {
+      value = false
+    }
+    updateCompleted(value)
   }
 
   return (
@@ -16,20 +23,30 @@ export default function FilterButtons() {
         className={classNames({
           'form-button w-auto flex-1 sm:flex-initial': true,
           'btn-outline-gray': !onlyMe,
-          'btn-gray': onlyMe,
+          'btn-outline-white': onlyMe,
         })}
       >
         Sadece Benim
       </button>
       <button
         type="button"
-        className="form-button btn-outline-danger w-auto flex-1 sm:flex-initial"
+        onClick={toggleCompleted.bind(this, 'completed')}
+        className={classNames({
+          'form-button w-auto flex-1 sm:flex-initial': true,
+          'btn-outline-gray': completed !== 'completed',
+          'btn-outline-white': completed === 'completed',
+        })}
       >
         Tamamlanmış
       </button>
       <button
         type="button"
-        className="form-button btn-outline-danger w-auto flex-1 sm:flex-initial"
+        onClick={toggleCompleted.bind(this, 'uncompleted')}
+        className={classNames({
+          'form-button w-auto flex-1 sm:flex-initial': true,
+          'btn-outline-gray': completed !== 'uncompleted',
+          'btn-outline-white': completed === 'uncompleted',
+        })}
       >
         Tamamlanmamış
       </button>

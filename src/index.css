@@ -39,9 +39,13 @@
   .btn-outline-gray {
     @apply bg-transparent border  border-gray-600 text-gray-400 hover:text-white hover:bg-gray-700 focus:ring-gray-800;
   }
+  
+  .btn-outline-white {
+    @apply bg-transparent border  border-white text-white hover:text-gray-800 hover:bg-white focus:ring-gray-400;
+  }
 
   .btn-gray {
-    @apply bg-transparent border  border-gray-600 text-gray-400 hover:text-white bg-gray-700 hover:bg-gray-800 focus:ring-gray-800;
+    @apply bg-transparent border  border-gray-600 text-gray-400 hover:text-white bg-gray-700 hover:bg-gray-900 focus:ring-gray-800;
   }
 
   .wrapper {
