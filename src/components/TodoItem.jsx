@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import { useAuth, useTodo } from '../context'
 import { trash, check, x } from '../icons'
+import { getUser } from '../utils'
 
 export default function TodoItem({ todo }) {
   const { user } = useAuth()
@@ -20,7 +21,7 @@ export default function TodoItem({ todo }) {
       <div className="flex flex-row flex-wrap gap-3 justify-between items-center">
         <div
           className={classNames({
-            'flex-1': true,
+            'flex-1 text-white': true,
             'line-through opacity-50': todo.complated,
           })}
         >
@@ -52,7 +53,9 @@ export default function TodoItem({ todo }) {
           </>
         )}
       </div>
-      {todo.userId !== user.id && <div className="text-sm opacity-30">emin</div>}
+      {todo.userId !== user.id && (
+        <div className="text-sm text-white opacity-30">{getUser(todo.userId).username}</div>
+      )}
     </div>
   )
 }
