@@ -1,9 +1,36 @@
+import { useEffect } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import classNames from 'classnames'
 import { useTodo, useAuth } from '../context'
 
 export default function FilterButtons() {
+  const [searchParams, setSearchParams] = useSearchParams()
+
   const { onlyMe, updateOnlyMe, completed, updateCompleted } = useTodo()
   const { user } = useAuth()
+
+  useEffect(() => {
+    if (searchParams.get('only-me') === 'true') updateOnlyMe(true)
+    if (searchParams.get('completed')?.length > 0) updateCompleted(searchParams.get('completed'))
+  }, [])
+
+  useEffect(() => {
+    if (onlyMe) {
+      searchParams.set('only-me', onlyMe)
+    } else {
+      searchParams.delete('only-me')
+    }
+    setSearchParams(searchParams)
+  }, [onlyMe])
+
+  useEffect(() => {
+    if (completed === false) {
+      searchParams.delete('completed')
+    } else {
+      searchParams.set('completed', completed)
+    }
+    setSearchParams(searchParams)
+  }, [completed])
 
   function onlyMeHandle() {
     updateOnlyMe(!onlyMe)
